@@ -64,16 +64,16 @@ func init() {
 
 // Function to handle incoming webhook requests
 func webhookHandler(w http.ResponseWriter, r *http.Request) {
-    // Extract token from Authorization header
-    token := r.Header.Get("Authorization")
+    // Extract token from X-Webhook-Token header
+    token := r.Header.Get("X-Webhook-Token")
     if token == "" {
-        http.Error(w, "Missing Authorization token", http.StatusUnauthorized)
+        http.Error(w, "Missing X-Webhook-Token token", http.StatusUnauthorized)
         return
     }
 
     // Validate the token
     if token != validToken {
-        http.Error(w, "Invalid Authorization token", http.StatusUnauthorized)
+        http.Error(w, "Invalid X-Webhook-Token token", http.StatusUnauthorized)
         return
     }
 
@@ -121,6 +121,8 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     }
 
     // Send the message to the Discord webhook
+    // Todo
+    // This payload successfully send to discord but return internal server error
     resp, err := http.Post(discordWebhookURL, "application/json", bytes.NewBuffer(discordPayload))
     if err != nil || resp.StatusCode != http.StatusOK {
         http.Error(w, "Failed to send message to Discord", http.StatusInternalServerError)
