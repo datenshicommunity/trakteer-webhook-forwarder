@@ -10,5 +10,5 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DISCORD_WEBHOOK_URL: "https://discord.com/api/webhooks/1234567890/ABCDEF"
+      DISCORD_WEBHOOK_URL: "https://discord.com/api/webhooks/1300091319795843183/5YAaO6eMWbhBPl_D-tIKih8QF3iLaBivAliR5srCu8j1_SlXKOATbYyeR40SRr6hMSEB"
       VALID_TOKEN: "1234567890"

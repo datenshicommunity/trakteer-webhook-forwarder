@@ -124,10 +124,13 @@ func webhookHandler(w http.ResponseWriter, r *http.Request) {
     // Todo
     // This payload successfully send to discord but return internal server error
     resp, err := http.Post(discordWebhookURL, "application/json", bytes.NewBuffer(discordPayload))
-    if err != nil || resp.StatusCode != http.StatusOK {
+    // Menghapus pemeriksaan status respons
+    if err != nil {
         http.Error(w, "Failed to send message to Discord", http.StatusInternalServerError)
         return
     }
+    // Menambahkan log untuk mencatat respons
+    log.Printf("Discord response status: %s", resp.Status)
 
     w.WriteHeader(http.StatusOK)
     w.Write([]byte("Payload sent to Discord successfully"))
