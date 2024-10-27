@@ -8,7 +8,6 @@ import (
     "net/http"
     "bytes"
     "os"
-    "github.com/joho/godotenv"
 )
 
 // Payload structure to match the incoming JSON
@@ -59,10 +58,6 @@ var discordWebhookURL string
 var validToken string
 
 func init() {
-    err := godotenv.Load()
-    if err != nil {
-        log.Fatal("Error loading .env file")
-    }
     discordWebhookURL = os.Getenv("DISCORD_WEBHOOK_URL")
     validToken = os.Getenv("VALID_TOKEN")
 }
